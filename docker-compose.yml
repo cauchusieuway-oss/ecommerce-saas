@@ -1,0 +1,24 @@
+services:
+  db:
+    image: postgres:15
+    container_name: ecommerce-db
+    restart: always
+    environment:
+      POSTGRES_DB: ecommerce_saas
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 16101960
+    ports:
+      - "5432:5432"
+
+  app:
+    build: .
+    container_name: ecommerce-app
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/ecommerce_saas
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: 16101960
