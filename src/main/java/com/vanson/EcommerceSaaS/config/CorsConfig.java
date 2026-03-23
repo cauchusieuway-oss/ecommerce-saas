@@ -12,7 +12,7 @@ public class CorsConfig {
     public CorsFilter corsFilter(){
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.addAllowedOrigin("http://localhost:3000");;
+        config.addAllowedOriginPattern("*"); // cho phép mọi domain
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
 
