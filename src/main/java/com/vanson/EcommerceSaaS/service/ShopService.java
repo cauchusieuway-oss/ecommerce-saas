@@ -30,10 +30,10 @@ public class ShopService {
         return shopRepository.save(shop);
     }
 
-    public List<Shop> getMyShops(String email) {
-        User user = userRepository.findByEmail(email)
+    public List<Shop> getMyShops(User owner) {
+       owner = userRepository.findByEmail(owner.getEmail())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        return shopRepository.findByOwnerId(user.getId());
+        return shopRepository.findByOwnerId(owner);
     }
 }

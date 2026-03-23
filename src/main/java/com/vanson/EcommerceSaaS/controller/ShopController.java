@@ -1,7 +1,7 @@
 package com.vanson.EcommerceSaaS.controller;
 
 import com.vanson.EcommerceSaaS.entity.Shop;
-import com.vanson.EcommerceSaaS.security.JwtAuthenticationToken;
+import com.vanson.EcommerceSaaS.entity.User;
 import com.vanson.EcommerceSaaS.service.ShopService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +25,7 @@ public class ShopController {
 
     @GetMapping
     public List<Shop> getMyShops(
-            @AuthenticationPrincipal String email) {
-        return shopService.getMyShops(email);
+            @AuthenticationPrincipal User owner) {
+        return shopService.getMyShops(owner);
     }
 }

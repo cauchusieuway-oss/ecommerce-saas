@@ -3,6 +3,7 @@ package com.vanson.EcommerceSaaS.controller;
 import com.vanson.EcommerceSaaS.dto.LoginRequest;
 import com.vanson.EcommerceSaaS.dto.LoginResponse;
 import com.vanson.EcommerceSaaS.entity.User;
+import com.vanson.EcommerceSaaS.service.AuthService;
 import com.vanson.EcommerceSaaS.service.UserService;
 import org.springframework.web.bind.annotation.*;
 @RestController
@@ -10,14 +11,16 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
 
     private final UserService userService;
+    private final AuthService authService;
 
-    public AuthController(UserService userService){
+    public AuthController(UserService userService, AuthService authService){
         this.userService = userService;
+        this.authService = authService;
     }
 
     @PostMapping("/register")
     public User register(@RequestBody User user) {
-        return userService.register(user);
+        return authService.register(user);
     }
 
     @PostMapping("/login")
