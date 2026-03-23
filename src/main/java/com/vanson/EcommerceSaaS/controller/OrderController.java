@@ -25,6 +25,7 @@ public class OrderController {
 
     @GetMapping
     public List<Order> getMyOrders(@AuthenticationPrincipal String email){
+
         return orderService.getMyOrders(email);
     }
 

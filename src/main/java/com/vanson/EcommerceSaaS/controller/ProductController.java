@@ -8,7 +8,6 @@ import com.vanson.EcommerceSaaS.repository.ShopRepository;
 import com.vanson.EcommerceSaaS.repository.UserRepository;
 import com.vanson.EcommerceSaaS.service.ProductService;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,7 +34,7 @@ public class ProductController {
         User user = userRepository.findByEmail(email).orElseThrow();
 
         //lấy shop của user
-        List<Shop> shops = shopRepository.findByOwnerId(user);
+        List<Shop> shops = shopRepository.findByOwnerId(user.getId());
 
         if (shops.isEmpty()) {
             throw new RuntimeException("No shop found");
@@ -56,5 +55,10 @@ public class ProductController {
         User user = userRepository.findByEmail(email).orElseThrow();
 
         return productRepository.findByShop_Owner(user);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteProduct(@PathVariable Long id) {
+        productRepository.deleteById(id);
     }
 }

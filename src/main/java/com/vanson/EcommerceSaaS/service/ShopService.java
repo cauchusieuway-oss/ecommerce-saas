@@ -34,6 +34,6 @@ public class ShopService {
        owner = userRepository.findByEmail(owner.getEmail())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        return shopRepository.findByOwnerId(owner);
+        return shopRepository.findByOwnerId(owner.getId());
     }
 }
